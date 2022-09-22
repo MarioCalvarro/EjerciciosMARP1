@@ -134,7 +134,7 @@
 \chapter{Hoja 1}%
 \label{cha:hoja_1}
 
-\section{Ejercicio 1}%
+\section{Ejercicio 1. (Iker Muñoz)}%
 \label{sec:ejercicio_1}
 No será coste constante amortizado. Contraejemplo:
 \begin{lstlisting}
@@ -145,12 +145,12 @@ fun multiapilar (p: pila, k: nat)
     fmientras
 ffun
 \end{lstlisting}
-Coste $O\left( k \right)$. Si considero la secuencia de $n$ llamadas a multiapilar tendremos:
+Coste $O\left( k \right)$. Si consideramos la secuencia de $n$ llamadas a multiapilar tendremos:
 \[
 \hat{c_i} = \frac{1}{n} \sum_{i=1}^{n} c_i = \frac{1}{n} \sum_{i=1}^{n} k = k.  
 \]
 
-\section{Ejercicio 2}%
+\section{Ejercicio 2. (Sergio García)}%
 \label{sec:ejercicio_2}
 Sí:
 \[
@@ -158,15 +158,15 @@ Sí:
 \]
 Incrementar y decrementar: $O\left( k \right) \Rightarrow n \text{ operaciones } O\left( nk \right)$.  
 
-\section{Ejercicio 3}%
+\section{Ejercicio 3. (Alba Bautista)}%
 \label{sec:ejercicio_3}
 Hemos de calcular $\frac{\sum_{j=1}^{n} c_j}{j}$. Lo hacemos primero para $j = 2^n$. 
 
 Consideramos $C_{in} = \{2^i : 0 \le i \le n\}$ y $\overline{C}_{in} = \left( 1, \ldots, 2^n \right) \ C_n$. 
 \[
-\sum_{i=1}^{\infty} C_i = \sum_{i \in C_n} C_i + \sum_{i=1}^{n} C_i = \sum_{i=1}^{\infty} 2^i + \sum_{i \in C_n} 1 = 2^{n+1} - 1 + \mid \overline{C}_n \mid \mid \overline{C}_n\mid = \mid 1 \ldots 2^n\mid - \mid C_n \mid = 2^n - \left( n + 1 \right) 
+\sum_{i=1}^{\infty} C_i = \sum_{i \in C_n} C_i + \sum_{i=1}^{n} C_i = \sum_{i=1}^{\infty} 2^i + \sum_{i \in C_n} 1 = 2^{n+1} - 1 + \mid \overline{C}_n \mid \mid \overline{C}_n\mid = \mid 1 \ldots 2^n\mid - \mid C_n \mid = 
 \]\[
-\Rightarrow \sum_{i=1}^{j} C_i = \left( 2^{n + 1} - 1 \right) + \left( 2^n - n - 1 \right) = 3 \cdot 2^n - n - 2 \Rightarrow \frac{\sum_{i=1}^{j} C_i}{2^n} \le 3 \in O\left( 1 \right) 
+= 2^n - \left( n + 1 \right) \Rightarrow \sum_{i=1}^{j} C_i = \left( 2^{n + 1} - 1 \right) + \left( 2^n - n - 1 \right) = 3 \cdot 2^n - n - 2 \Rightarrow \frac{\sum_{i=1}^{j} C_i}{2^n} \le 3 \in O\left( 1 \right) 
 \]
 De forma similar si tomamos $j = 2^n + j': j' \in 1, \ldots, 2^n - 1$.
 \[
@@ -177,9 +177,9 @@ Ya que $\begin{cases}
     j' \le j
 \end{cases} $
 
-\section{Ejercicio 4}%
+\section{Ejercicio 4. (??)}%
 \label{sec:ejercicio_4}
-Utilizo el método del potencial para calcular el coste amortizado: 
+Utilizamos el método del potencial para calcular el coste amortizado: 
 
 $\Phi \left( D_i \right)$ elementos en la lista tras operación i-ésima
 \begin{itemize}
@@ -193,7 +193,7 @@ $\Phi \left( D_i \right)$ elementos en la lista tras operación i-ésima
     \]
 \end{itemize}
 
-\section{Ejercicio 5}%
+\section{Ejercicio 5. (??)}%
 \label{sec:ejercicio_5}
 \begin{lstlisting}
 proc contar(C[0, ..., k - 1] de {0, 1}, E/S posSig: nat)
@@ -223,8 +223,12 @@ fproc
 valor\left( c \right) = \sum_{j=0}^{\text{posSig}} 2^jC\left[ j \right]  
 \]
 
-\section{Ejercicio 6}%
+\section{Ejercicio 6. (Juan Diego Barrado)}%
 \label{sec:ejercicio_6}
+\underline{DISCLAMER}: Este ejercicio no está ni de cerca completo. Recomiendo no utilizar este documento para estudiarlo. 
+
+% Faltan dibujos y la explicación no solo es incompleta sino que también es posiblemente errónea.
+
 \underline{Buscar}:
 
 Para cada $A_i$, hacer búsqueda binaria tiene coste en $O\left( \log 2^i \right) = O\left( i \right)$. 
@@ -237,7 +241,7 @@ Cuando insertamos $n$ elementos como mucho viajan al nivel $\log\left( n \right)
 T\left( n \right) = \sum_{j=0}^{\log n} 2^j \cdot \frac{n}{2^{j+1}} = \frac{n}{2} \log n.
 \]
 
-\section{Ejercicio 7}%
+\section{Ejercicio 7. (Leonardo Macías)}%
 \label{sec:ejercicio_7}
 Base: $b\left[ 0, \ldots, n-1 \right] \in \mathbb{Z}^n$ con $b\left[ i \right] \ge 2$.
 
@@ -270,18 +274,15 @@ Como $\forall j \in \{0, \ldots, n-1\}: b\left[ j \right] \ge 2$:
 \frac{1}{n} \sum_{i=0}^{n} \frac{n}{\prod_{j=0}^{i} b\left[ j \right]} = \sum_{i=0}^{n} \frac{1}{\prod_{j=0}^{i} b\left[ j \right]} \le 2   
 \]
 
-\section{Ejercicio 8}%
+\section{Ejercicio 8. (Beñat Pérez)}%
 \label{sec:ejercicio_8}
-% Pedirselo a Beñat
-//COMPLETAR
-
 \begin{enumerate}
-\item[a)] Utilizamos dos pilas una de valores y otra de máximos.
+\item[a)] Utilizamos dos pilas una de los elementos y otra de máximos.
 
 Operaciones:
 \begin{lstlisting}
 proc apilar(p1, p2: pila; k: ent)
-    si !p2.empty AND k \ge p2.top =>
+    si !p2.empty AND k <= p2.top =>
         p2.push(k)
     fsi
     p1.push(k)
@@ -289,11 +290,11 @@ fproc
 \end{lstlisting}
 
 \begin{lstlisting}
-func maximo (p2: pila)
+proc maximo (p2: pila; k: ent)
     si !p2.empty => 
         return p2.top
     fsi
-ffunc
+fproc
 \end{lstlisting}
 
 \begin{lstlisting}
@@ -306,17 +307,49 @@ proc desapilar(p1, p2: pila)
     p1.pop
 fproc
 \end{lstlisting}
+
 \item[b)] Operaciones:
 
 \begin{lstlisting}
-proc anyadir(p1, p2: pilas; k: ent) 
+proc anyadir(p1: pila; k: ent) 
     si !p1.empty =>
         p1.push(k, max(k, p1.top)
-    si no
+    si no =>
         p1.push(k, max)
     fsi
 fproc
 \end{lstlisting}
+
+\begin{lstlisting}
+func max(p1, p2: pila) 
+    return max(p1.top.b, p2.top.b)
+fproc
+\end{lstlisting}
+
+\begin{lstlisting}
+proc desapilar(p1, p2: pilas; k: ent) 
+    si !p2.empty =>
+        si !p1.empty =>
+            p2.push(p1.top.a, p1.top.a)
+            p1.pop
+            mientras !p1.empty hacer
+                p2.push(p1.top.a, max(p1.top.a, p2.top.b)
+                p1.pop
+            fmientras
+            p2.pop
+        fsi
+    si no =>
+        p2.pop
+    fsi
+fproc
+\end{lstlisting}
+En el caso peor tendremos $O\left( n \right)$. Sin embargo, amortizado de $n$ operaciones nos saldrá $O\left( 1 \right)$ por operación.
+
+Por el método de contabilidad. Asumamos que apilar tiene coste $3$ (poner el elemento en $p_1$, quitarlo de $p_1$ y ponerlo en $p_2$). Así, solamente nos queda que desapilar tiene coste $1$, ya que habría que hacer una sola operación. 
+
+Además, la función máximo es constante. 
+
+Con todo, nos queda que el coste amortizado es $O\left( 1 \right)$.
 \end{enumerate}
 
 \end{document}
