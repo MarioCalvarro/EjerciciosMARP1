@@ -352,4 +352,146 @@ Además, la función máximo es constante.
 Con todo, nos queda que el coste amortizado es $O\left( 1 \right)$.
 \end{enumerate}
 
+\section{Ejercicio 9 (Lucía Alonso)}%
+\label{sec:ejercicio_9_lucia_alonso_}
+Tenemos una cola $C$, creamos una doble cola llamada $maximos$ para llevar el control del máximo de $C_1$: 
+\[
+    maximos[i]: 0 \le i < n : \forall j : i < j \le n: maximos[i] \le maximos[j]
+\]
+\begin{itemize}
+    \item En la llamada a $borrar\left( \right)$ elemento de $C_1$ debemos comprobar si es $1^{er}$ máximo.
+    \item En la llamada a $insertar\left( \right)$ elemento de $C_1$ debemos borrar todos los elementos de máximo menores que él.
+\end{itemize}
+\begin{ej}
+\begin{align*}
+    C = 5, 4, 3, 2, 1;&\quad maximos = 5, 4, 3, 2, 1 \Rightarrow insertar\left( 3 \right)\\
+    C = 5, 4, 3, 2, 1, 3;&\quad maximos = 5, 4, 3, 3 \Rightarrow remove\left(\right)\\
+    C = 4, 3, 2, 1, 3;&\quad maximos = 4, 3, 3 \Rightarrow insert\left( 6 \right)\\
+    C = 4, 3, 2, 1, 3, 6;&\quad maximos = 6
+.\end{align*}
+\end{ej}
+\begin{lstlisting}
+proc insertar(cola: C1, doble cola : maximos, elemento: x)
+    c.push(x)
+    mientras !maximos.empty() AND maximos.back() < x 
+        maximo.pop_back()
+    fmientras
+    maximos.push_back(x)
+fproc
+\end{lstlisting}
+
+\begin{lstlisting}
+proc borrar(cola: C1, doble cola: maximos) 
+    si c.front() = maximos.front()
+        maximos.pop_front()
+    fsi
+    c.pop()
+fproc
+\end{lstlisting}
+
+\begin{lstlisting}
+{!maximo.empty()}
+func getMax(doble cola: maximo)
+    return maximo.front()
+ffunc
+\end{lstlisting}
+
+\underline{Coste amortizado}. Por el método del potencial.
+\begin{itemize}
+    \item \underline{Caso peor}: Se añade el máximo de $C$ y $maximos$ está ordenada decrecientemente:
+    \[
+    c_i = 4 + n \in O\left( n \right) \Rightarrow \text{Lineal.} 
+    \]
+    En la siguiente llamada, cola vacía: 
+    \[
+    c_{i+1} = 4 + 1 \in O\left( 1 \right) \Rightarrow \text{cte.} 
+    \]
+    \item \underline{Método del potencial}: 
+    \[
+    \Phi\left( D_i \right) = \text{longitud de la doble cola de máximos.} 
+    \]
+    Al empezar con $C$ vacía se cumple $\forall i: \Phi\left( D_i \right) - \Phi\left( D_{0} \right) > 0$.
+    \begin{itemize}
+        \item En la llamada a $getMax\left( \right)$: 
+        \[
+        \hat{c}_i = c_i + \Phi\left( D_i \right) - \Phi\left( D_{i-1} \right) = 1 \in O\left( 1 \right)
+        \] Al ser una operación de consulta.
+        \item En la llamada $borrar\left(  \right)$: 
+        \[
+        \hat{c}_i = c_i + \Phi\left( D_i \right) - \Phi\left( D_{i-1} \right) = \begin{cases}
+            2 \text{ si no se borra el máximo}\\
+            2 + m - 2 -m = 1 \text{ c.c} 
+        \end{cases} 
+        \]
+        \item En la llamada a $insertar\left( \right)$:
+        \[
+        \hat{c}_i = c_i + \Phi\left( D_i \right) - \Phi\left( D_{i-1} \right) = 4 + b_i + \left( k - b_i \right) - k = 4 \in O\left( 1 \right)
+        \]
+    \end{itemize}
+    Es decir, el coste amortizado es \underline{constante}.
+\end{itemize}
+
+\section{Ejercicio 10}%
+\label{sec:ejercicio_10}
+Por el \underline{método del potencial}. 
+\[
+\Phi\left( D_i \right) = M + m
+\]
+Con $\Phi\left( D_0 \right) = 0$ y $\Phi\left( D_i \right) \ge 0$.
+
+\begin{itemize}
+    \item $maximo\left( \right)$:
+    \[
+    \hat{c_i} = 1 + M + m - M - m = 1
+    \]
+    \item $minimo\left( \right)$:
+    \[
+    \hat{c_i} = 1 + M + m - M - m = 1
+    \]
+    \item $eliminar\left( \right)$:
+    \begin{itemize}
+        \item Máximo: $\hat{c}_i = 2 + M - 1 + m - M - m = 1$.
+        \item Mínimo: $\hat{c}_i = 2 + M + m - 1 - M - m = 1$.
+        \item Ninguno: $\hat{c}_i = 1 + M + m - M - m = 1$.
+    \end{itemize}
+    \item $insertar\left( \right)$:
+    \begin{itemize}
+        \item Máximo: $\hat{c}_i = m + 3 + 1 + m + 1 - \left( M + m \right) = 5$
+        \item Mínimo: $\hat{c}_i = m + 3 + M + 1 + 1 - \left( M + m \right) = 5$
+        \item Ninguno: $\hat{c}_i = a + b + 3 + M - a + 1 + m - b + 1 - \left( M + m \right) = 5$
+    \end{itemize}
+\end{itemize}
+
+\section{Ejercicio 11}%
+\label{sec:ejercicio_11}
+\begin{lstlisting}
+class multiconj {
+    valores: array <int>
+    n: int
+    +constructor vacio() {
+        valores := new int[max]
+        n := 0;
+    }
+
+    +insertar(v: int) {
+        si (n < max) {
+            valores[n] = v
+            n := n + 1
+        fsi
+    }
+    +elimMayores {
+        nborrar := ceil(n/2)
+        m := mediana(valores/n)
+        i := 0; elim = 0; j = 0;
+        mientras i < n
+            si valores[i] > m
+                valores [i] := null
+                elim := elim + 1
+            fsi
+            i := i + 1
+        fmientras
+    }
+}
+\end{lstlisting}
+
 \end{document}
