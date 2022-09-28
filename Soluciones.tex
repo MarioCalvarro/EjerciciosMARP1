@@ -490,8 +490,34 @@ class multiconj {
             fsi
             i := i + 1
         fmientras
+        mientras j < n AND elim < nborrar
+            si valores[j] = m
+                valores[j] := null
+                elim := elim + 1
+            fsi 
+            j := j + 1
+        fmientras
+        i := 0; j := 0
+        mientras j < n
+            si valores[j] != null
+                valores[i] = valores[j]
+                i := i + 1
+            fsi
+        fmientras
+        n := n - elim; f elim mayores?
     }
 }
 \end{lstlisting}
+Coste por el método del \underline{potencial} 
+\[
+\Phi\left( D_i \right) = 2n
+\]\[
+\hat{c}_{insertar} = c_{insertar} + \left( \Phi\left( D_i \right) - \Phi\left( D_{i-1} \right) \right) = 1 + 2 = 3 \in O\left( 1 \right) 
+\]\[
+\hat{c}_{elimMayores} = c_{elimMayores} + \left( \Phi\left( D_i \right) - \Phi\left( D_{i-1} \right)\right) = n - 2 \left\lfloor n/2 \right\rfloor = \begin{cases}
+    0 \text{ si } n \text{ es par}\\
+    1 \text{ si } n \text{ es impar} 
+\end{cases} 
+\]
 
 \end{document}
