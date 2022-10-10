@@ -520,4 +520,89 @@ Coste por el método del \underline{potencial}
 \end{cases} 
 \]
 
+\chapter{Hoja 2}%
+\label{cha:hoja_2}
+\section{Ejercicio 1. (Natalia Rodríguez)}%
+\label{sec:ejercicio_1_natalia_rodriguez_}
+\begin{lstlisting}
+func esEA (t: arbolbinario) dev (h: ent, b: bool)
+   caso vacio?(t) entonces (0, true)
+       !vacio?(t) entonces sea (l, x, r) = desc(t)
+                     (hl, bl) = esEA(l)
+                     (hr, br) = esEA(r)
+                     en(max(hl, hr) + 1, bl AND br AND |hl - hr| <= 1)
+   fcaso
+ffunc
+\end{lstlisting}
+
+\section{Ejercicio 2. (Dylan Hewitt)}%
+\label{sec:ejercicio_2_dylan_hewitt_}
+\begin{lstlisting}
+func zurdo(T: arbolBinario) dev (esZurdo: bool, nNodos: nat)
+    caso vacio?(t) entonces (true, 0)
+        !vacio?(t) entonces sea (iz, x, dr) = desc(t) en 
+        caso vacio?(iz) AND vacio?(dr) entonces (true, 1)
+            !vacio?(dr) OR !vacio?(dr) sean (esZurdoIz, nNodosIz) = zurdo(iz)
+                                            (esZurdoDr, nNodosDr) = zurdo(dr) 
+                    entonces: 
+                    (esZurdoDr AND esZurdoIz AND nNodosDr < nNodosIz, 
+                    nNodosIz + nNodosDr + 1)
+        fcaso
+    fcaso
+ffunc
+\end{lstlisting}
+
+\section{Ejercicio 3. (Laura Rodrigo)}%
+\label{sec:ejercicio_3_laura_rodrigo}
+Dibujo
+
+\section{Ejercicio 4. (Pablo García)}%
+\label{sec:ejercicio_4_pablo_garcia_}
+(\textit{Dibujo)}
+
+Sea $T_1, T_2$ completos con $h_{T_1} = h_{T_2} + 1$
+
+$T_1, T_2$ son equilibrados por ser completos, $T$ también por serlo $T_1, T_2$ y $\| h_{T_1} - h_{T_2} = \|h_{T_2} + 1 - h_{T_2} \| = 1 \le 1$. Sean $n_{T_i}$ el número de nodos de $T_i$ : 
+\begin{align*}
+    n_{T_1} &= \sum_{i=0}^{h_{T_1} - 1} 2^{i} = \frac{1 - 2^{h_{T_1}}}{1 - 2} = 2^{h_{T_1}} - 1 = 2^{h_{T_2} + 1} - 1\\ 
+    n_{T_2} &= \sum_{i=0}^{h_{T_2} - 1} 2^{i} = \frac{1 - 2^{h_{T_2}}}{1 - 2} = 2^{h_{T_2}} - 1
+.\end{align*}
+Entonces: 
+\begin{align*}
+    n_{T_1} - n_{T_2} &= 2^{h_{T_2} + 1} - 1 - 2^{h_{T_2}} + 1\\
+                    &= 2^{h_{T_2}} \cdot 2 - 2^{h_{T_2}} \\
+                    &= 2^{h_{T_2}} \Rightarrow\\
+    \lim_{h_{T_2} \rightarrow \infty} n_{T_1} - n_{T_2} &= \lim_{h_{T_2} \rightarrow \infty} 2^{h_{T_2}} = \infty  
+.\end{align*}
+Es decir, 
+\[
+\forall C > 0,\ \exists m \in \mathbb{N} : h_{T_2} \le m \Rightarrow n_{T_1} - n_{T_2} > C.
+\]
+
+\section{Ejercicio 5. (Iker Muñoz)}%
+\label{sec:ejercicio_5_iker_munoz_}
+Supongamos un desequilibrio LL ($h_{iz} = h_{der} + 2$)
+
+(\textit{Dibujo})
+
+Por reducción al absurdo. 
+\begin{itemize}
+    \item Si $h_{ii} = h_{id} = h \Rightarrow$ No hay desequilibrio.
+    \item Si $h_{ii} = h_{id} = h+1 \Rightarrow$ Antes de insertar ya había un desequilibrio, es decir, no se cumplía la precondición.
+    \item $h_{id} \neq h_{ii}$ (Análogo RR)
+\end{itemize}
+
+Insertamos y hacemos una rotación:
+
+(\textit{Dibujo}) 
+
+La rotación disminuye en $1$ la altura del árbol y tenemos la altura original. 
+
+El elemento ya está insertado y el árbol es AVL, por lo que no es necesario más rotaciones.
+
+\section{Ejercicio 6. (Virginia Chacón)}%
+\label{sec:ejercicio_6_virginia_chacón_}
+(\textit{Dibujo}) 
+
+
 \end{document}
