@@ -126,6 +126,49 @@
     
     \usetikzlibrary{shapes}
 
+%% Hacer árboles
+\usetikzlibrary{arrows,chains,topaths,positioning,fit,automata,shapes.misc,calc}
+\usepackage{tikz-qtree}
+
+\makeatletter
+
+\let\old@@children\@@children
+\def\@@children{\futurelet\my@next\my@@children}
+\def\my@@children{%
+\ifx\my@next\missing\else
+\expandafter\@gobble
+\fi
+\expandafter\old@@children}
+
+\makeatother
+
+\newcommand{\missing}{ \edge[edge from parent path={(\tikzparentnode) -- ($ (\tikzparentnode) !.5! (\tikzchildnode) $)}]; \node[draw=none] {};}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 \begin{document}
 \maketitle
@@ -539,16 +582,17 @@ ffunc
 \label{sec:ejercicio_2_dylan_hewitt_}
 \begin{lstlisting}
 func zurdo(T: arbolBinario) dev (esZurdo: bool, nNodos: nat)
-    caso vacio?(t) entonces (true, 0)
-        !vacio?(t) entonces sea (iz, x, dr) = desc(t) en 
-        caso vacio?(iz) AND vacio?(dr) entonces (true, 1)
-            !vacio?(dr) OR !vacio?(dr) sean (esZurdoIz, nNodosIz) = zurdo(iz)
-                                            (esZurdoDr, nNodosDr) = zurdo(dr) 
-                    entonces: 
-                    (esZurdoDr AND esZurdoIz AND nNodosDr < nNodosIz, 
-                    nNodosIz + nNodosDr + 1)
-        fcaso
+  caso vacio?(t) entonces (true, 0)
+    !vacio?(t) entonces sea (iz, x, dr) = desc(t) en 
+    caso vacio?(iz) AND vacio?(dr) entonces (true, 1)
+      !vacio?(dr) OR !vacio?(dr) sean:
+              (esZurdoIz, nNodosIz) = zurdo(iz)
+              (esZurdoDr, nNodosDr) = zurdo(dr) 
+         entonces: 
+         (esZurdoDr AND esZurdoIz AND nNodosDr < nNodosIz, 
+         nNodosIz + nNodosDr + 1)
     fcaso
+  fcaso
 ffunc
 \end{lstlisting}
 
@@ -603,6 +647,218 @@ El elemento ya está insertado y el árbol es AVL, por lo que no es necesario m�
 \section{Ejercicio 6. (Virginia Chacón)}%
 \label{sec:ejercicio_6_virginia_chacón_}
 (\textit{Dibujo}) 
+
+\section{Ejercicio 7. (Pablo García)}%
+\label{sec:ejercicio_7_pablo_garcia_}
+Muy extenso.
+
+\section{Ejercicio 8. (??)}%
+\label{sec:ejercicio_8_}
+para transformar un AVL en conjunto, lo recorremos en inorden que nos va a dar una lista ordenada. 
+
+\begin{lstlisting}
+vector conjunto_arbol(arbol a) 
+    vector v;
+    inorden(v, a);
+    return v;
+\end{lstlisting}
+
+\begin{lstlisting}
+vector inorden(vector v, arbol a)
+    if (a != null) then
+        inorden(v, a->izq);
+        v.push_back(a->root());
+        inorden(v, a->der);
+    end if;
+\end{lstlisting}
+
+\begin{lstlisting}
+vector union_conjunto(const vector& a, const vector& a1)
+    int i = 0, j = 0;
+    vector union;
+    while (i < a
+\end{lstlisting}
+
+\section{Ejercicio 9. (Antonio Parrilla)}%
+\label{sec:ejercicio_9_antonio_parrilla_}
+
+
+\section{Ejercicio 22. (Alejandro Ysasi)}%
+\label{sec:ejercicio_22_alejandro_ysasi_}
+Blanrrojinegro = rojinegro $+$ color azul (solo hijo de rojo).
+
+Ahora tenemos $3$ colores con las siguientes restricciones: 
+\begin{itemize}
+    \item No puede haber $2$ azules seguidos (nodo azul solo tiene hijos azules).
+    \item Un nodo rojo solo puede ser hijo de negro.
+    \item No puede haber $2$ rojos seguidos (nodo rojo solo tiene hijo negro o azul).
+    \item Azul solo es hijo de rojo.
+\end{itemize}
+
+Por tanto, la máxima cantidad de colores en un nodo interno son $1$ negro, $2$ rojos, $4$ azules.
+
+\underline{Jerárquicamente}: negro $>$ rojo $>$ azul.
+
+$2-3-\ldots-8$ árbol permite nodos de hasta $7$ claves y $8$ hijos. 
+\begin{itemize}
+    \item Si se inserta un $2$-nodo $\Rightarrow 3$ nodo 
+    \item $\ldots$
+    \item Si se inserta un $8$-nodo $\Rightarrow 2$ nodo $+ 5$ nodo $+ 4$ nodo.
+    \item Blanrrojinegro $\Rightarrow$ Ahora se inserta con azul y no con rojo (correspondientes operaciones) 
+    \item $2, 3, 4$ nodos igual que rojinegro
+\end{itemize}
+
+\chapter{Hoja 3}%
+\label{cha:hoja_3}
+\section{Ejercicio 5. (María del Mar Ramiro)}%
+\label{sec:ejercicio_5_maria_del_mar_}
+Montículo de mínimos:
+\begin{lstlisting}
+fun decrecer(v : monticulo, p : posicion, c : clave)
+  si p >= 0 && p < v.size() && c < v[p]
+    v[p] := c
+    flotar(v, p)
+  fsi
+ffun
+\end{lstlisting}
+
+\begin{lstlisting}
+fun aumentar(v : monticulo, p : posicion, c : clave) 
+  si p >= 0 && p < v.size() && v[p] < c
+    v[p] := c
+    hundir(v, p)
+  fsi
+ffun
+\end{lstlisting}
+
+En un montículo de máximos se cambian flotar y hundir.
+
+\section{Ejercicio 7. (Mario Calvarro)}%
+\label{sec:ejercicio_7_mario_calvarro_}
+En primer lugar, estudiemos la relación entre la representación binaria de la posición de un nodo y el camino de decisiones que nos lleva a dicho nodo (decisión entre tomar el camino izquierdo o el derecho en los nodos que le preceden). Veámoslo con un ejemplo:
+
+\begin{center}
+\begin{tikzpicture}[edge from parent/.style={draw,thick},every tree node/.style={draw,thick,circle,align=center, inner sep=0pt, text width=1.5em,text centered,
+    font=\sffamily},edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}, sibling distance=.1cm,level distance=10mm]
+\Tree [.5
+         [.10
+           [.14
+             [.25 ] 
+             [.40 ] ]
+           [.21
+             [.38 ] 
+             \missing ] ]
+         [.7 
+           [.30 ] 
+           [.18 ] ] 
+      ]
+\end{tikzpicture}
+\end{center}
+
+En el árbol presentado tenemos diez nodos diferentes por lo que la representación de sus posiciones en binario irán desde $0001_2$ hasta $1010_2$, es decir, sustituyendo los valores de los nodos por su posición en binario:
+
+\begin{center}
+\begin{tikzpicture}[edge from parent/.style={draw,thick},every tree node/.style={draw,thick,circle,align=center, inner sep=0pt, text width=2.2em,text centered,
+    font=\sffamily},edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}, sibling distance=.1cm,level distance=10mm]
+\Tree [.0001
+         [.0010
+           [.0100
+             [.1000 ] 
+             [.1001 ] ]
+           [.0101
+             [.1010 ] 
+             \missing ] ]
+         [.0011 
+           [.0110 ] 
+           [.0111 ] ] 
+      ]
+\end{tikzpicture}
+\end{center}
+
+Lo primero que salta a la vista es que la posición del $1_2$ más significativo representa el ``nivel'' en el que se encuentra el nodo empezando por el nivel 1. Por tanto, si el $1_2$ más significativo se encuentra en el bit menos significativo se tendrá que es el nivel $1$, si está en la siguiente más significativo se tendrá que es el nivel $2$, etc.
+
+Por otro lado, los siguientes bits nos indican las decisiones tomadas en los anteriores niveles, siendo un $0_2$ camino izquierdo y $1_2$ camino derecho. Por ejemplo, si tenemos el nodo $10 = 1010_2$ nos indica que en el camino seguido a la inversa fue izquierda, derecha e izquierda:
+
+\begin{center}
+\tikzset{
+  verde/.style = {line width=1mm,green}
+}
+\begin{tikzpicture}[edge from parent/.style={draw,thick},every tree node/.style={draw,thick,circle,align=center, inner sep=0pt, text width=2.2em,text centered,
+    font=\sffamily},edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}, sibling distance=.1cm,level distance=10mm]
+\Tree [.0001
+         \edge[verde];
+         [.0010
+           [.0100
+             [.1000 ] 
+             [.1001 ] ]
+           \edge[verde];
+           [.0101
+             \edge[verde];
+             [.1010 ] 
+             \missing ] ]
+         [.0011 
+           [.0110 ] 
+           [.0111 ] ] 
+      ]
+\end{tikzpicture}
+\end{center}
+
+A su vez, podemos ver que que realizando un desplazamiento hacia la derecha hallamos directamente la posición del padre de un nodo, siempre que los bits que quedan libres a la izquierda los sustituyamos por un $0$. Por ejemplo, si tenemos la posición $10 = 1010_2$ y realizamos un desplazamiento nos quedará $0101_2 = 5$ que es el nodo padre. 
+
+Esta operación es equivalente a la división entera por $2$ que se realiza en un montículo de Williams implementado por vectores.
+
+Con esto podemos demostrar por inducción que la posición $0 < p < m$, con $m = $ bit $1_2$ más significativo, en la cadena de bits nos indica la decisión tomada al bajar del nivel $m - p$:
+\begin{itemize}
+    \item \underline{Caso base}: Si tenemos un árbol de $3$ elementos la raíz será $01_2$, su hijo izquierdo $10_2$ y el derecho $11_2$. Es decir, el bit menos significativo nos indicará si el camino seguido era el izquierdo ($0$) o derecho ($1$).
+    \item \underline{Caso inductivo}: Supongamos ahora que todos los nodos hasta el nivel $p$ cumplen esta propiedad y tomemos un elemento cualquiera del nivel $p + 1$. Si ahora realizamos un desplazamiento a la derecha nos quedará la disposición binaria del nodo del padre por lo que, aplicando la hipótesis de inducción, nos quedará que todos los bits hasta el $p + 1$, que es el $1_2$ que indica el nivel, menos el primero, que es el que se pierde con el desplazamiento, nos indican el camino seguido hasta el padre. Pero
+        con el caso base sabemos que el primer bit nos indica si el hijo es el izquierdo o el derecho.
+\end{itemize}
+
+Finalmente, para realizar la implementación de la inserción lo que haremos será seguir el camino que nos indica donde se insertará el nuevo elemento manteniendo la estructura de semicompletitud, es decir, el que nos viene dado por $dec2bin(n+1)$\footnote{Suponemos que el tamaño del vector que devuelve será hasta el $1_2$ más significativo.}. 
+En el caso de encontrarnos por el camino un nodo con un valor mayor al que se va insertar los cambiaremos y continuaremos con el valor del nodo cambiado. Con esto mantendremos la propiedad de mínimos. Por tanto,
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=c++]
+void insertar(const T& x)
+{
+  //Caso Base
+  if (n == 0) 
+    t.root() = new Node<T>(x); 
+  else 
+  {
+    vector<bool> camino = dec2bin(n+1); 
+    T elemento = x;
+    BinTree<T> arbol = t;
+
+    //Como n > 0 => camino.size() >= 2
+    for (size_t i = camino.size() - 2; i > 0; --i)
+    { 
+      if (t.root() > x) 
+        swap(arbol.root(), x);
+
+      if (camino[i])
+        arbol = arbol->left();
+      else 
+        arbol = arbol->right();
+    }
+
+    if (t.root() > x) 
+      swap(arbol.root(), x);
+
+    if (camino[0])
+      t.left() = new Node<T>(elem);
+    else 
+      t.right() = new Node<T>(elem);
+  }
+
+  ++n;
+}
+\end{lstlisting}    
+\end{minipage}
+
+El coste del algoritmo vendrá dado por el bucle principal que realiza un total de $\log\left( n \right)$ operaciones (el tamaño del vector de bits será $\log\left( n \right)$) todas ellas constantes. En definitiva, el coste será $O\left( \log\left( n \right) \right)$ en el caso peor.
+
+
 
 
 \end{document}
