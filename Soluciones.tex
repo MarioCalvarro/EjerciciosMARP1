@@ -858,6 +858,88 @@ void insertar(const T& x)
 
 El coste del algoritmo vendrá dado por el bucle principal que realiza un total de $\log\left( n \right)$ operaciones (el tamaño del vector de bits será $\log\left( n \right)$) todas ellas constantes. En definitiva, el coste será $O\left( \log\left( n \right) \right)$ en el caso peor.
 
+\section{Ejercicio 8.(Adrián Carlos Skaczylo)}%
+\label{sec:ejercicio_8_adrian_carlos_skaczylo_}
+Insertar:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=c++]
+flotar(int i) 
+  int pos = i;
+  Elem p, h, e;
+  bool inv = false;
+  while (pos != 1 && !inv)
+  {
+    p = array[pos/2];
+    e = array[pos];
+
+    if (pos % 2 = 0 && pos + 1 < array.size()) 
+      h = array[pos + 1]
+    else 
+      h = array[pos - 1]
+
+    if (e.max <= p.min) 
+      array[pos] = p
+      array[pos/2] = e
+    else if (e.min >= p.max) 
+      Inv = true
+      if (e.max > h.min && e.min < h.max)
+        intercambiar(e, h)
+    else 
+      intercambiar(e, p)
+      intercambiar(e, h)
+
+    pos = pos / 2;
+  }
+\end{lstlisting}
+\end{minipage}
+
+Eliminar:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=c++]
+hundir(int i) 
+  int pos = i
+  Elem e
+  int p_HI, p_HD, p_hMP
+  bool inv = false;
+  p_HI = 2 * pos //puede no existir
+
+  while (!inv && p_HI <= size())
+  {
+    e = array[pos]
+    p_HD = p_HI + 1
+    if (p_HD <= size && masPeq(p_HD))
+      p_hMP = p_HD
+    else 
+      p_hMP = p_HI
+      p_HD = p_HI
+
+    if (masPeq(e, p_hMP))
+      inv = true
+    else if(masPeq(p_hMP, e) 
+      array[pos] = array[p_hMP]
+      array[p_hMP] = e
+      intercambiar(p_HI, p_HD)
+    else 
+      intercambiar(p_hMP, e)
+      intercambiar(p_HI, p_HD)
+
+    pos = pos_hMD
+    pos_HY = pos * 2
+  }
+\end{lstlisting}
+\end{minipage}
+
+\section{Ejercicio 9. (Pablo Zamora)}%
+\label{sec:ejercicio_9_pablo_zamora_}
+
+\section{Ejercicio 11. (Salvador Dzimah)}%
+\label{sec:ejercicio_11_salvador_dzimah_}
+La secuencia será:
+\[
+    \begin{matrix} 0 & -1 & 1 & -2 & 2 & -3 & 3 & -4 & 4 \end{matrix} 
+\]
 
 
 
