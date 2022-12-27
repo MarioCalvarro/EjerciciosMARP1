@@ -941,6 +941,178 @@ La secuencia será:
     \begin{matrix} 0 & -1 & 1 & -2 & 2 & -3 & 3 & -4 & 4 \end{matrix} 
 \]
 
+\section{Ejercicio 15}%
+\label{sec:ejercicio_15}
+Árbol semicompleto en el que los niveles de máximos y mínimos se van alternando.
+
+Otra opción es dos árboles de Williams, uno de mínimos y otro de máximos que mantengan una referencia al otro para mantener la consistencia.
+
+Otras opciones:
+\begin{itemize}
+    \item Deaps.
+    \item Máx-mín
+    \item Intervalos
+\end{itemize}
+
+\section{Ejercicio 23}%
+\label{sec:ejercicio_23}
+
+\chapter{Hoja 4}%
+\label{cha:hoja_4}
+\section{Ejercicio 1}%
+\label{sec:ejercicio_1_4}
+No tiene sentido porque es no dirigido
+
+\section{Ejercicio 2}%
+\label{sec:ejercicio_2_4}
+Matriz $V^2$ y lista de adyacencia $V\cdot E$.
+
+\section{Ejercicio 3}%
+\label{sec:ejercicio_3_4}
+Si es por matriz es el producto normal (en binario). El coste será $V^3$.
+
+Con listas de adyacencia será el coste respecto a $V, E$.
+
+\section{Ejercicio 4}%
+\label{sec:ejercicio_4_4}
+Pensar con el grado de entrada/salida $0$ o no $0$ y aquellos con ambos $0$.
+
+\section{Ejercicio 5}%
+\label{sec:ejercicio_5_4}
+Usamos tabla hash de listas. Con la tabla hash solo tenemos la información positiva (actuando como un a matriz). Como los grafos son muy grandes en la práctica, las tablas hash pueden tener muchos conflictos.
+
+\section{Ejercicio 6}%
+\label{sec:ejercicio_6_4}
+Usamos una matriz de adyacencia. 
+Si hay sumidero solo hay uno. Recorremos la matriz buscándolo y, después, lo comprobamos.
+Fila todo unos y columna ceros. Al revés sabemos directamente que no es sumidero.
+
+\section{Ejercicio 8}%
+\label{sec:ejercicio_8_4}
+Dibujos
+
+\section{Ejercicio 9}%
+\label{sec:ejercicio_9_4}
+Dibujos
+Empezamos por el $1$.
+
+\section{Ejercicio 10}%
+\label{sec:ejercicio_10_4}
+Usamos una pila o una cola dependiendo de si es DFS o BFS.
+
+
+\section{Ejercicio 11}%
+\label{sec:ejercicio_11_4}
+Clase.
+
+\section{Ejercicio 12}%
+\label{sec:ejercicio_12_4}
+Ejercicio 9.9 libro.
+
+\section{Ejercicio 13}%
+\label{sec:ejercicio_13_4}
+Mismo que antes pero por componentes
+Descartamos las aristas que generan un ciclo. 
+
+\section{Ejercicio 14}%
+\label{sec:ejercicio_14_4}
+9.10 del libro
+Grado de salida $> 0$ y el de entrada $= 0$. Solo puede haber uno. 
+Primero buscamos los candidatos.
+
+\section{Ejercicio 15}%
+\label{sec:ejercicio_15_4}
+Cada cambio de adyacencia se cambia el color. Vamos comprobando que se mantienen los colores correctos. Si hay contradicción no es $2$-coloreable.
+
+\section{Ejercicio 16}%
+\label{sec:ejercicio_16_4}
+Dibujo
+
+\section{Ejercicio 17}%
+\label{sec:ejercicio_17_4}
+Búsqueda por el camino buscando el mínimo de las aristas. Descartamos aquellos que tienen ``mala'' capacidad.
+
+\section{Ejercicio 18}%
+\label{sec:ejercicio_18_4}
+Caminos mínimos descartan ciclos. Formamos un subgrafo con las aristas que no forman ciclos. Con esto tenemos un recubrimiento. Con este algoritmo, el camino puede ser mínimo, pero no el árbol.
+
+\section{Ejercicio 19}%
+\label{sec:ejercicio_19_4}
+
+\section{Ejercicio 20}%
+\label{sec:ejercicio_20_4}
+Variación de Dijkstra. No solo calculamos la distancia mínima, también el nº de caminos. Tendremos un vector de distancias y otro de nº de caminos mínimos. Cuando encontramos un camino mejor también tenemos que actualizar el resto de información.
+
+\section{Ejercicio 21}%
+\label{sec:ejercicio_21_4}
+Otra variación, es caso de igualdad de coste nos quedamos con el camino con menos aristas. Necesitamos llevar información adicional. Debemos mantener correctamente los datos.
+
+\section{Ejercicio 22}%
+\label{sec:ejercicio_22_4}
+Pensamos en el flujo de los ejercicios anteriores. No interesa la distancia mínima, sino la capacidad mejor.
+
+Nos interesa saber el cuello de botella, si este vale, el resto también.
+
+\section{Ejercicio 23}%
+\label{sec:ejercicio_23_4}
+Ejercicios 9.11, 9.12 libro.
+
+\section{Ejercicio 24}%
+\label{sec:ejercicio_24_4}
+Dado árbol de recubrimiento, si empezamos podando las hojas (en ese orden), podemos conseguir lo que se pide.
+
+\section{Ejercicio 25}%
+\label{sec:ejercicio_25_4}
+Concepto de grafo se extiende con la información adicional de si se puede conectar.
+
+\section{Ejercicio 26}%
+\label{sec:ejercicio_26_4}
+Usamos como en Kruskal y Prim con colas de prioridad de mínimos. El test que se hace es comprobar cosas (union-find)
+
+\section{Ejercicio 27}%
+\label{sec:ejercicio_27_4}
+Si es conexo, $\exists$ recubrimiento. Por finitud entre ellos, habrá uno mínimo. Con Kruskal tenemos el bosque de recubrimiento. En el bucle en vez de la condición $V - 1$ vértices debemos cambiarlo en caso de que no tengamos todos los vértices (cola vacía o similar). Similar con Prim. 
+
+\section{Ejercicio 28}%
+\label{sec:ejercicio_28_4}
+Encontrar un ciclo de longitud  mínima cuyo tamaño sea exactamente $V$.
+
+\section{Ejercicio 31}%
+\label{sec:ejercicio_31_4}
+El árbol de recubrimiento es único. El orden puede ser distinto. Inducción. Debe cumplir el lema de corte.
+
+\chapter{Hoja 5}%
+\label{cha:hoja_5}
+Para los ejercicios en general tenemos:
+\begin{itemize}
+    \item Estrategia
+    \item Implementación de la estrategia (normalmente ordenación, en pseudocódigo)
+    \item Demostración de la corrección. Solemos usar el método de la reducción de diferencias.
+    \item Coste del algoritmo. Suele ser el de la ordenación.
+\end{itemize}
+
+\section{Ejercicio 1}%
+\label{sec:ejercicio_1_5}
+Clases de equivalencia = TAD conjuntos disjuntos. Primero igualdades, después desigualdades. Con igualdades vamos actualizando el Union-Find buscando las clases de equivalencia. Con desigualdades si dos están en la misma clase, son insatisfactibles. Coste lineal.
+
+\section{Ejercicio 2}%
+\label{sec:ejercicio_2_5}
+Tareas procesador transparencias, generalizado. 12.4 del libro.
+
+\section{Ejercicio 3}%
+\label{sec:ejercicio_3_5}
+12.5 libro.
+
+\section{Ejercicio 4}%
+\label{sec:ejercicio_4_5}
+12.10 libro.
+
+\section{Ejercicio 7}%
+\label{sec:ejercicio_7_5}
+12.8
+
+\section{Ejercicio 8}%
+\label{sec:ejercicio_8_5}
 
 
 \end{document}
